@@ -29,3 +29,6 @@
   - name: print the output details
     ansible.builtin.debug:
       msg: "MYSQL info: {{ mysql_info }}"
+    
+  - name: load schema
+    ansible.builtin.command: "mysql_secure_installation --set-root-pass ExpenseApp@1"
