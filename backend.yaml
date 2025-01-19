@@ -2,6 +2,11 @@
   hosts: backend
   become: yes
   tasks:
+  - name: install MYSQL libraries
+    ansible.builtin.pip:
+      name: PyMySQL
+      executable: pip3.9
+
   - name: disable current nodejs
     ansible.builtin.command: dnf module disable nodejs -y
   
