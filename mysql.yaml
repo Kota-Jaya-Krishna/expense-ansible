@@ -31,4 +31,6 @@
       msg: "MYSQL info: {{ mysql_info }}"
     
   - name: create database user and password
-    ansible.builtin.command: "mysql_secure_installation --set-root-pass ExpenseApp@1"
+    ansible.builtin.command: "mysql_secure_installation --set-root-pass {{ login_password }}"
+    when: mysql_info.failed is true
+
