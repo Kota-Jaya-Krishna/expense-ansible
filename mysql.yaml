@@ -5,5 +5,4 @@
   - name: install mysql
     mysql.builtin.package:
       name: mysql-server
-      state: present
-      
+      state: installed
