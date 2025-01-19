@@ -1,6 +1,8 @@
 - name: configure Mysql
   hosts: mysql
   become: yes
+  vars:
+    mysql_root_password: ExpenseApp@1
   tasks:
   - name: install MYSQL libraries
     ansible.builtin.pip:
@@ -10,7 +12,6 @@
     - cryptography
     - PyMySQL
        
-
   - name: install mysql
     ansible.builtin.package:
       name: mysql-server
@@ -25,7 +26,7 @@
   - name: connect to mysql server
     community.mysql.mysql_info:
       login_user: root
-      login_password: ExpenseApp@1
+      login_password: "{{ mysql_root_password }}"
       login_host: mysql.learndevopsacademy.online
     register: mysql_info
     ignore_errors: true
@@ -35,6 +36,6 @@
       msg: "MYSQL info: {{ mysql_info }}"
     
   - name: create database user and password
-    ansible.builtin.command: "mysql_secure_installation --set-root-pass {{ login_password }}"
+    ansible.builtin.command: "mysql_secure_installation --set-root-pass {{ mysql_root_password }}"
     when: mysql_info.failed is true
 
