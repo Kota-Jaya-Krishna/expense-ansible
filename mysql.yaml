@@ -1,0 +1,9 @@
+- name: configure Mysql
+  hosts: mysql
+  become: yes
+  tasks:
+  - name: install mysql
+    mysql.builtin.package:
+      name: mysql-server
+      state: present
+      
